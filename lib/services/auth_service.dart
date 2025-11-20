@@ -1,22 +1,34 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'supabase_client.dart'; // ini berisi Supabase.instance.client
 
 class AuthService {
   final supabase = Supabase.instance.client;
 
   // REGISTER
-  Future<String?> register(String email, String password) async {
+  Future<String?> register(String email, String password, String username) async {
     try {
+      // 1. Signup
       final response = await supabase.auth.signUp(
         email: email,
         password: password,
       );
 
-      if (response.user == null) {
+      final user = response.user;
+
+      if (user == null) {
         return "Gagal membuat akun";
       }
 
+      // 2. Insert ke tabel profiles
+      await supabase.from('profiles').insert({
+        'id': user.id,
+        'username': username,
+        'email': email,
+      });
+
       return null; // sukses
+
+    } on PostgrestException catch (e) {
+      return e.message;
     } on AuthException catch (e) {
       return e.message;
     } catch (e) {
@@ -32,11 +44,9 @@ class AuthService {
         password: password,
       );
 
-      if (response.user == null) {
-        return "Email atau password salah";
-      }
+      if (response.user == null) return "Email atau password salah";
 
-      return null; // sukses
+      return null;
     } on AuthException catch (e) {
       return e.message;
     } catch (e) {

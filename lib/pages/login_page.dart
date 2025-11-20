@@ -95,19 +95,6 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 10),
 
-                // REMEMBER ME
-                Row(
-                  children: [
-                    Checkbox(
-                      value: rememberMe,
-                      onChanged: (v) => setState(() => rememberMe = v ?? false),
-                    ),
-                    const Text("Remember me"),
-                  ],
-                ),
-
-                const SizedBox(height: 10),
-
                 // LOGIN BUTTON
                 SizedBox(
                   width: double.infinity,
