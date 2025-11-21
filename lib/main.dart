@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
+import 'package:trashsmart/pages/home_page.dart';
+import 'pages/onboarding_page.dart';
 import 'pages/login_page.dart';
 import 'pages/register_page.dart';
 
@@ -31,6 +32,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (_) => const LoginPage(),
         '/register': (_) => const RegisterPage(),
+        '/home': (_) => const HomePage(),
+        '/onboarding': (_) => const OnboardingPage(),
 
         // USER
         

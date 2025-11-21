@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
 
                     // CEK ADMIN LOKAL
                     if (email == "admin" && password == "12345") {
-                      Navigator.pushReplacementNamed(context, '/admin_dashboard');
+                      Navigator.pushReplacementNamed(context, '/home');
                       return;
                     }
 
@@ -147,14 +147,24 @@ class _LoginPageState extends State<LoginPage> {
                       backgroundColor: Colors.white,
                     ),
                     onPressed: () async {
-                    try {
-                      await auth.loginWithGoogle();
-                    } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(e.toString())),
-                      );
-                    }
-                  },
+                      try {
+                        final session = await auth.loginWithGoogle();
+
+                        if (session != null) {
+                          // LANGSUNG MASUK KE HOME
+                          Navigator.pushReplacementNamed(context, '/home');
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Login Google gagal.")),
+                          );
+                        }
+
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(e.toString())),
+                        );
+                      }
+                    },
 
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

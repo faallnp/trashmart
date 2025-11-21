@@ -55,15 +55,19 @@ class AuthService {
   }
 
   // LOGIN GOOGLE
-  Future<String?> loginWithGoogle() async {
-    try {
-      await supabase.auth.signInWithOAuth(
-        OAuthProvider.google,
-        redirectTo: "io.supabase.flutter://login-callback/",
-      );
-      return null;
-    } catch (e) {
-      return "Google Login gagal: $e";
-    }
+  Future<bool> loginWithGoogle() async {
+  try {
+    await supabase.auth.signInWithOAuth(
+      OAuthProvider.google,
+      redirectTo: "io.supabase.flutter://login-callback/",
+    );
+
+    // SIGN-IN DENGAN OAUTH BUTUH LISTENER UNTUK MENUNGGU SESSION MASUK
+    final session = await supabase.auth.onAuthStateChange.first;
+
+    return session.session != null;
+  } catch (e) {
+    return false;
   }
+}
 }
