@@ -91,6 +91,7 @@ class HomePage extends StatelessWidget {
                     "Sampah Organik",
                     "assets/organik.png",
                         () {
+                          Navigator.pushNamed(context, '/organik');
                     },
                   ),
                   learningCard(
