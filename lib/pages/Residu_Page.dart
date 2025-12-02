@@ -6,7 +6,7 @@ class ResiduPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF9F5EC),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
