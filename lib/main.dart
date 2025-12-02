@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:trashsmart/pages/Anorganik_Page.dart';
+import 'package:trashsmart/pages/B3_Page.dart';
+import 'package:trashsmart/pages/Kertas_Page.dart';
+import 'package:trashsmart/pages/Residu_Page.dart';
 import 'package:trashsmart/pages/SampahOrganik.dart';
 import 'package:trashsmart/pages/home_page.dart';
 
@@ -35,6 +39,10 @@ class MyApp extends StatelessWidget {
         '/register': (_) => const RegisterPage(),
         '/home': (_) => const HomePage(),
         '/organik': (_) => const OrganikPage(),
+        '/anorganik': (_) => const AnorganikPage(),
+        '/B3': (_) => const B3Page(),
+        '/kertas' : (_) => const KertasPage(),
+        '/residu' : (_) => const ResiduPage(),
 
         // USER
         

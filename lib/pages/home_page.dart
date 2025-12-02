@@ -98,22 +98,29 @@ class HomePage extends StatelessWidget {
                     "Sampah Anorganik",
                     "assets/anorganik.png",
                         () {
+                          Navigator.pushNamed(context, '/anorganik');
                         },
                   ),
                   learningCard(
                     "Sampah B3",
                     "assets/b3.png",
-                        () {},
+                        () {
+                          Navigator.pushNamed(context, '/B3');
+                        },
                   ),
                   learningCard(
                     "Sampah Kertas",
                     "assets/kertas.png",
-                        () {},
+                        () {
+                          Navigator.pushNamed(context, '/kertas');
+                        },
                   ),
                   learningCard(
                     "Sampah Residu",
                     "assets/residu.png",
-                        () {},
+                        () {
+                          Navigator.pushNamed(context, '/residu');
+                        },
                   ),
                 ],
               ),
