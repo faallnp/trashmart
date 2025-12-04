@@ -4,6 +4,12 @@ import 'package:trashsmart/pages/home_page.dart';
 import 'pages/onboarding_page.dart';
 import 'pages/login_page.dart';
 import 'pages/register_page.dart';
+import 'pages/organik_page.dart';
+import 'pages/anorganik_page.dart';
+import 'pages/b3_page.dart';
+import 'pages/kertas_page.dart';
+import 'pages/residu_page.dart';
+import 'pages/welcome_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +32,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // HALAMAN AWAL
-      initialRoute: '/login',
+      initialRoute: '/welcome',
 
       // ROUTES LIST
       routes: {
@@ -34,7 +40,12 @@ class MyApp extends StatelessWidget {
         '/register': (_) => const RegisterPage(),
         '/home': (_) => const HomePage(),
         '/onboarding': (_) => const OnboardingPage(),
-
+        '/organik': (context) => const OrganikPage(),
+        '/anorganik': (context) => const AnorganikPage(),
+        '/b3': (context) => const B3Page(),
+        '/kertas': (context) => const KertasPage(),
+        '/residu': (context) => const ResiduPage(),
+        '/welcome': (context) => const WelcomePage(),
         // USER
         
       },

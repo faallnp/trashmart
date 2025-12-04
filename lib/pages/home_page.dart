@@ -87,32 +87,40 @@ class HomePage extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  learningCard(
+                 learningCard(
                     "Sampah Organik",
                     "assets/organik.png",
-                        () {
+                    () {
+                      Navigator.pushNamed(context, '/organik');
                     },
                   ),
                   learningCard(
                     "Sampah Anorganik",
                     "assets/anorganik.png",
-                        () {
-                        },
+                    () {
+                      Navigator.pushNamed(context, '/anorganik');
+                    },
                   ),
                   learningCard(
                     "Sampah B3",
                     "assets/b3.png",
-                        () {},
+                    () {
+                      Navigator.pushNamed(context, '/b3');
+                    },
                   ),
                   learningCard(
                     "Sampah Kertas",
                     "assets/kertas.png",
-                        () {},
+                    () {
+                      Navigator.pushNamed(context, '/kertas');
+                    },
                   ),
                   learningCard(
                     "Sampah Residu",
                     "assets/residu.png",
-                        () {},
+                    () {
+                      Navigator.pushNamed(context, '/residu');
+                    },
                   ),
                 ],
               ),

@@ -60,98 +60,155 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 onPageChanged: (index) => setState(() => currentIndex = index),
                 itemCount: pages.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 20),
-                        Text(
-                          pages[index]['title']!,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF3C5122),
-                          ),
-                        ),
-                        const SizedBox(height: 14),
-                        Text(
-                          pages[index]['desc']!,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Color(0xFF3C5122),
-                          ),
-                        ),
-                        const SizedBox(height: 30),
+                  // AnimatedBuilder dengan perhitungan responsif & easing
+                  return AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, child) {
+                      final double screenW = MediaQuery.of(context).size.width;
+                      double page = index.toDouble();
+                      if (_controller.hasClients && _controller.page != null) {
+                        page = _controller.page!;
+                      }
+                      final double delta = page - index;
+                      final double rawOffset = delta.abs().clamp(0.0, 1.0);
+                      final double eased = Curves.easeOut.transform(rawOffset);
 
-                        /// IMAGE
-                        Expanded(
-                          child: Image.asset(
-                            pages[index]['image']!,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
+                      // responsif berdasarkan lebar layar
+                      final double translateX = delta * screenW * 0.06; // seluruh page slide
+                      final double pageScale = 1 - (eased * 0.06);
 
-                        const SizedBox(height: 20),
+                      // image lebih "hidup" saat bergeser
+                      final double imageTranslateX = delta * screenW * 0.12;
+                      final double imageScale = 1 - (eased * 0.12);
 
-                        /// DOT INDICATOR
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(3, (i) {
-                            return AnimatedContainer(
-                              duration: const Duration(milliseconds: 250),
-                              margin: const EdgeInsets.symmetric(horizontal: 4),
-                              width: currentIndex == i ? 16 : 8,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                color: currentIndex == i
-                                    ? const Color(0xFF3C5122)
-                                    : Colors.grey,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            );
-                          }),
-                        ),
+                      // teks lebih subtle dan pake eased opacity
+                      final double textOpacity = (1 - eased * 0.7).clamp(0.0, 1.0);
+                      final double titleTranslateX = delta * screenW * 0.03;
+                      final double descTranslateX = delta * screenW * 0.02;
 
-                        const SizedBox(height: 25),
+                      return Transform.translate(
+                        offset: Offset(translateX, 0),
+                        child: Transform.scale(
+                          scale: pageScale,
+                          child: Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 20),
 
-                        /// BUTTONS
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            /// BACK
-                            if (currentIndex != 0)
-                              ElevatedButton(
-                                onPressed: back,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF3C5122),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12)),
-                                  minimumSize: const Size(80, 40),
+                                // TITLE with slight fade/translate
+                                Opacity(
+                                  opacity: textOpacity,
+                                  child: Transform.translate(
+                                    offset: Offset(titleTranslateX, 0),
+                                    child: Text(
+                                      pages[index]['title']!,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontSize: 26,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF3C5122),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                child: const Text("Back"),
-                              )
-                            else
-                              const SizedBox(width: 80),
 
-                            /// NEXT
-                            ElevatedButton(
-                              onPressed: next,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF3C5122),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12)),
-                                minimumSize: const Size(80, 40),
-                              ),
-                              child: Text(currentIndex == 2 ? "Finish" : "Next"),
+                                const SizedBox(height: 14),
+
+                                Opacity(
+                                  opacity: textOpacity,
+                                  child: Transform.translate(
+                                    offset: Offset(descTranslateX, 0),
+                                    child: Text(
+                                      pages[index]['desc']!,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xFF3C5122),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                const SizedBox(height: 30),
+
+                                /// IMAGE (animated separately)
+                                Expanded(
+                                  child: Transform.translate(
+                                    offset: Offset(imageTranslateX, 0),
+                                    child: Transform.scale(
+                                      scale: imageScale,
+                                      child: Image.asset(
+                                        pages[index]['image']!,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                const SizedBox(height: 20),
+
+                                /// DOT INDICATOR (dinamis dari jumlah pages)
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: List.generate(pages.length, (i) {
+                                    final bool active = currentIndex == i;
+                                    return AnimatedContainer(
+                                      duration: const Duration(milliseconds: 300),
+                                      curve: Curves.easeOut,
+                                      margin: const EdgeInsets.symmetric(horizontal: 6),
+                                      width: active ? 18 : 8,
+                                      height: 8,
+                                      decoration: BoxDecoration(
+                                        color: active ? const Color(0xFF3C5122) : Colors.grey.shade400,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    );
+                                  }),
+                                ),
+
+                                const SizedBox(height: 25),
+
+                                /// BUTTONS
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    /// BACK
+                                    if (currentIndex != 0)
+                                      ElevatedButton(
+                                        onPressed: back,
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: const Color(0xFF3C5122),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20)),
+                                          minimumSize: const Size(80, 40),
+                                        ),
+                                        child: const Text("Back"),
+                                      )
+                                    else
+                                      const SizedBox(width: 80),
+
+                                    /// NEXT
+                                    ElevatedButton(
+                                      onPressed: next,
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color(0xFF3C5122),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(20)),
+                                        minimumSize: const Size(80, 40),
+                                      ),
+                                      child: Text(currentIndex == pages.length - 1 ? "Finish" : "Next"),
+                                    ),
+                                  ],
+                                ),
+
+                                const SizedBox(height: 20),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-
-                        const SizedBox(height: 20),
-                      ],
-                    ),
+                      );
+                    },
                   );
                 },
               ),

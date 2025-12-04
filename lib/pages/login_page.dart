@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
 
                         if (session != null) {
                           // LANGSUNG MASUK KE HOME
-                          Navigator.pushReplacementNamed(context, '/home');
+                          Navigator.pushReplacementNamed(context, '/onboarding');
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("Login Google gagal.")),

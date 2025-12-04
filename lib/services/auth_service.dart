@@ -6,7 +6,7 @@ class AuthService {
   // REGISTER
   Future<String?> register(String email, String password, String username) async {
     try {
-      // 1. Signup
+      // 1. Sign Up
       final response = await supabase.auth.signUp(
         email: email,
         password: password,
@@ -18,7 +18,7 @@ class AuthService {
         return "Gagal membuat akun";
       }
 
-      // 2. Insert ke tabel profiles
+      // 2. Insert ke tabel profiles (HARUS pakai id = user.id)
       await supabase.from('profiles').insert({
         'id': user.id,
         'username': username,
@@ -55,19 +55,15 @@ class AuthService {
   }
 
   // LOGIN GOOGLE
-  Future<bool> loginWithGoogle() async {
-  try {
-    await supabase.auth.signInWithOAuth(
-      OAuthProvider.google,
-      redirectTo: "io.supabase.flutter://login-callback/",
-    );
-
-    // SIGN-IN DENGAN OAUTH BUTUH LISTENER UNTUK MENUNGGU SESSION MASUK
-    final session = await supabase.auth.onAuthStateChange.first;
-
-    return session.session != null;
-  } catch (e) {
-    return false;
+  Future<String?> loginWithGoogle() async {
+    try {
+      await supabase.auth.signInWithOAuth(
+        OAuthProvider.google,
+        redirectTo: "io.supabase.flutter://login-callback/",
+      );
+      return null;
+    } catch (e) {
+      return "Google Login gagal: $e";
+    }
   }
-}
 }
