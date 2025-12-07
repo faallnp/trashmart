@@ -40,6 +40,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  shared_preferences: ^2.1.1
+  image_picker: ^0.8.7+4
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -59,6 +61,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - assets/
     - assets/logo.png
     - assets/google.png
     - assets/residu.png
@@ -73,6 +76,8 @@ flutter:
     - assets/onboard2.png
     - assets/onboard3.png
     - assets/logo_awal.png
+    - assets/ornamen_1.png
+    - assets/ornamen_2.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

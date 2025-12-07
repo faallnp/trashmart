@@ -10,6 +10,8 @@ import 'pages/b3_page.dart';
 import 'pages/kertas_page.dart';
 import 'pages/residu_page.dart';
 import 'pages/welcome_page.dart';
+import 'pages/trash_learning_page.dart';
+import 'pages/trash_news_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +48,8 @@ class MyApp extends StatelessWidget {
         '/kertas': (context) => const KertasPage(),
         '/residu': (context) => const ResiduPage(),
         '/welcome': (context) => const WelcomePage(),
+        '/learning': (context) => const TrashLearningPage(),
+        '/news': (context) => const TrashNewsPage(),
         // USER
         
       },

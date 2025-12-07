@@ -57,10 +57,10 @@ class AuthService {
   // LOGIN GOOGLE
   Future<String?> loginWithGoogle() async {
     try {
-      await supabase.auth.signInWithOAuth(
-        OAuthProvider.google,
-        redirectTo: "io.supabase.flutter://login-callback/",
-      );
+              await supabase.auth.signInWithOAuth(
+          OAuthProvider.google,
+          redirectTo: "trashsmart://auth-callback",
+        );
       return null;
     } catch (e) {
       return "Google Login gagal: $e";

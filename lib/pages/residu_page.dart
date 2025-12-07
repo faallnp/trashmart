@@ -6,97 +6,110 @@ class ResiduPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A1A),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                color: Color(0xFF3F4F44),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(25),
-                  bottomRight: Radius.circular(25),
-                ),
-              ),
-              child: Stack(
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      child: Icon(Icons.arrow_back, color: Colors.white),
-                    ),
-                  ),
-                  Center(
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 10),
-                        Image.asset("assets/residu.png", height: 150),
-                        const SizedBox(height: 10),
-                        const Text(
-                          "Sampah Residu",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 10),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                color: Colors.white,
-                child: const SingleChildScrollView(
-                  child: Text(
-                    """
-⚫ Sampah Residu
-
-Sampah residu adalah sampah yang tidak bisa didaur ulang, tidak bisa diolah, dan tidak termasuk kategori organik, anorganik, ataupun B3.
-
-▶ Penjelasan Mendalam
-
-Sampah ini sering berakhir di TPA dan menghasilkan masalah besar seperti bau, gas metana, dan cairan lindi yang beracun. Karena tidak ada teknologi ekonomis untuk mengolah sebagian besar residu, tujuan utama pengelolaan sampah modern adalah mengurangi produksi sampah residu sampai level terendah.
-
-▶ Contoh Sampah Residu Lengkap
-
-– Popok sekali pakai
-– Pembalut
-– Tisu bekas
-– Filter rokok
-– Masker medis sekali pakai
-– Bahan plastik campuran
-– Spons dan foam terkontaminasi
-– Sisa makanan bercampur plastik
-– Styrofoam kotor
-
-▶ Bahaya Sampah Residu
-
-– Sulit terurai (puluhan–ratusan tahun)
-– Mencemari tanah
-– Menghasilkan bau kuat
-– Mengundang hama dan penyakit
-
-▶ Cara Pengelolaan
-
-– Mengurangi produk sekali pakai
-– Menggunakan produk ramah lingkungan
-– Menyimpan residu dalam kantong tertutup
-– Tidak mencampur residu dengan sampah yang masih bisa didaur ulang
-                    """,
-                    style: TextStyle(fontSize: 15, height: 1.5),
+      backgroundColor: const Color(0xFFF9F5EC),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              // Background card
+              Container(
+                height: 340,
+                decoration: const BoxDecoration(
+                  color: Color(0xFF3E472D),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
                   ),
                 ),
               ),
+
+              // Tombol back
+              Positioned(
+                top: 45,
+                left: 15,
+                child: GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                      color: Colors.white24,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 22,
+                    ),
+                  ),
+                ),
+              ),
+
+              // Ornamen daun kanan atas
+              Positioned(
+                top: 40,
+                right: 25,
+                child: Image.asset(
+                  "assets/ornamen_1.png",
+                  width: 55,
+                  fit: BoxFit.contain,
+                ),
+              ),
+
+              // Ornamen daun kiri bawah
+              Positioned(
+                bottom: 20,
+                left: 20,
+                child: Image.asset(
+                  "assets/ornamen_2.png",
+                  width: 65,
+                  fit: BoxFit.contain,
+                ),
+              ),
+
+              // Gambar Tempat Sampah
+              Positioned.fill(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    "assets/residu.png",
+                    height: 220,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 20),
+
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              "Sampah B3",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF3E472D),
+              ),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 20),
+
+          // Bagian MATERI MATERI
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              "Materi-materi ABCD",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF3E472D),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+        ],
       ),
     );
   }
