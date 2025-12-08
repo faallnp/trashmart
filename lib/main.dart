@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:trashsmart/pages/data_profile.dart';
 import 'package:trashsmart/pages/home_page.dart';
 import 'pages/onboarding_page.dart';
 import 'pages/login_page.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // HALAMAN AWAL
-      initialRoute: '/welcome',
+      initialRoute: '/data',
 
       // ROUTES LIST
       routes: {
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         '/welcome': (context) => const WelcomePage(),
         '/learning': (context) => const TrashLearningPage(),
         '/news': (context) => const TrashNewsPage(),
+        '/data': (context) => const DataProfilePage(),
         // USER
         
       },
