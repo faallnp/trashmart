@@ -6,12 +6,12 @@ class DataProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F5EC),
+      backgroundColor: const Color(0xFFF8F3E8),
 
       body: SingleChildScrollView(
         child: Column(
           children: [
-            //HEADER
+            // ================= HEADER =================
             Stack(
               clipBehavior: Clip.none,
               children: [
@@ -28,7 +28,7 @@ class DataProfilePage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset("assets/logo.png", width: 50),
+                      Image.asset("assets/logo_tanpanama.png", width: 50),
                       const SizedBox(width: 8),
                       const Text(
                         "TRASHSMART",
@@ -64,7 +64,7 @@ class DataProfilePage extends StatelessWidget {
                 Positioned(
                   bottom: -50,
                   left: 0,
-                  right: 200,
+                  right: 190,
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
@@ -76,6 +76,17 @@ class DataProfilePage extends StatelessWidget {
                           backgroundImage: AssetImage("assets/profile.png"),
                         ),
                       ),
+
+                      // Edit icon
+                      Container(
+                        margin: const EdgeInsets.only(right: 6, bottom: 6),
+                        padding: const EdgeInsets.all(6),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xFF445A40),
+                        ),
+                        child: const Icon(Icons.edit, color: Colors.white, size: 20),
+                      ),
                     ],
                   ),
                 ),
@@ -84,7 +95,7 @@ class DataProfilePage extends StatelessWidget {
 
             const SizedBox(height: 70),
 
-            //FORM
+            // ================= FORM =================
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
@@ -105,15 +116,7 @@ class DataProfilePage extends StatelessWidget {
                   const SizedBox(height: 6),
                   textField("email"),
 
-                  const SizedBox(height: 20),
-                  const Text(
-                    "Password",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(height: 6),
-                  textField("password", isPassword: true),
-
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 40),
 
                   // UPDATE BUTTON
                   Center(
@@ -126,7 +129,7 @@ class DataProfilePage extends StatelessWidget {
                       child: TextButton(
                         onPressed: () {},
                         child: const Text(
-                          "Konfrimasi",
+                          "Update",
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ),
