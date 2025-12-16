@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-class Artikel1Page extends StatelessWidget {
+class Artikel1Page extends StatefulWidget {
   const Artikel1Page({super.key});
+  @override
+  State<Artikel1Page> createState() => _Artikel1PageState();
+}
+
+class _Artikel1PageState extends State<Artikel1Page> {
+  bool _isLiked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +48,7 @@ class Artikel1Page extends StatelessWidget {
                 Text("13 Nov 2025 08:19 WIB",
                     style: TextStyle(fontSize: 13, color: Colors.grey)),
                 SizedBox(width: 16),
-                Icon(Icons.access_time, size: 16, color: Colors.grey),
-                SizedBox(width: 6),
-                Text("Waktu baca 1 menit",
-                    style: TextStyle(fontSize: 13, color: Colors.grey)),
+               
               ],
             ),
             const SizedBox(height: 16),
@@ -98,43 +101,50 @@ class Artikel1Page extends StatelessWidget {
       ),
 
       // Bottom action bar
-        bottomNavigationBar: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          decoration: const BoxDecoration(
-            color: Color(0xFFF8F3E8), // ← ganti warna di sini
-            border: Border(top: BorderSide(color: Colors.grey, width: 0.2)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Komentar
-              ElevatedButton.icon(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFBDD4C0),
-                  foregroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: const BoxDecoration(
+          color: Color(0xFFF8F3E8),
+          border: Border(top: BorderSide(color: Colors.grey, width: 0.2)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Komentar
+            ElevatedButton.icon(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFBDD4C0),
+                foregroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              icon: const Icon(Iconsax.message),
+              label: const Text("Tambahkan komentar..."),
+            ),
+
+            const SizedBox(width: 8),
+
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () => setState(() => _isLiked = !_isLiked),
+                  icon: Icon(
+                    _isLiked ? Icons.favorite : Icons.favorite_border,
+                    size: 28,
+                    color: _isLiked ? Colors.red : Colors.black,
                   ),
                 ),
-                icon: const Icon(Iconsax.message),
-                label: const Text("Tambahkan komentar..."),
-              ),
-
-              const SizedBox(width: 8),
-
-              Row(
-                children: const [
-                  Icon(Iconsax.heart, size: 28),
-                  SizedBox(width: 16),
-                  Icon(Icons.bookmark_border, size: 28),
-                  SizedBox(width: 16),
-                  Icon(Icons.share, size: 28),
-                ],
-              ),
-            ],
-          ),
-        )
+                const SizedBox(width: 16),
+                const Icon(Icons.bookmark_border, size: 28),
+                const SizedBox(width: 16),
+                const Icon(Icons.share, size: 28),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

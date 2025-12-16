@@ -16,6 +16,9 @@ import 'pages/residu_page.dart';
 import 'pages/welcome_page.dart';
 import 'pages/trash_learning_page.dart';
 import 'pages/trash_news_page.dart';
+import 'pages/profile_page.dart';
+import 'pages/splash_video_page.dart';
+import 'pages/admin_panel_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,11 +41,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // HALAMAN AWAL
-      initialRoute: '/artikel2',
+      initialRoute: '/',
 
       // ROUTES LIST
       routes: {
         '/login': (_) => const LoginPage(),
+         '/': (_) => const SplashVideoPage(),
         '/register': (_) => const RegisterPage(),
         '/home': (_) => const HomePage(),
         '/onboarding': (_) => const OnboardingPage(),
@@ -54,10 +58,17 @@ class MyApp extends StatelessWidget {
         '/welcome': (context) => const WelcomePage(),
         '/learning': (context) => const TrashLearningPage(),
         '/news': (context) => const TrashNewsPage(),
-        '/data': (context) => const DataProfilePage(),
+        '/data': (context) => DataProfilePage(
+      currentUsername: '',
+      currentEmail: '',
+    ),
+
         '/artikel1': (context) => const Artikel1Page(),
         '/artikel2': (context) => const Artikel2Page(),
         '/artikel3': (context) => const Artikel3Page(),
+        '/profiles': (context) => const ProfilePage(),
+        '/adminpage': (context) => const AdminPage(),
+        
         // USER
         
       },

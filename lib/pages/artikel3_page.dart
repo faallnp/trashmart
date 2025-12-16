@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-class Artikel3Page extends StatelessWidget {
+class Artikel3Page extends StatefulWidget {
   const Artikel3Page({super.key});
+  @override
+  State<Artikel3Page> createState() => _Artikel3PageState();
+}
+
+class _Artikel3PageState extends State<Artikel3Page> {
+  bool _isLiked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +48,7 @@ class Artikel3Page extends StatelessWidget {
                 Text("13 Nov 2025 08:19 WIB",
                     style: TextStyle(fontSize: 13, color: Colors.grey)),
                 SizedBox(width: 16),
-                Icon(Icons.access_time, size: 16, color: Colors.grey),
-                SizedBox(width: 6),
-                Text("Waktu baca 1 menit",
-                    style: TextStyle(fontSize: 13, color: Colors.grey)),
+               
               ],
             ),
             const SizedBox(height: 16),
@@ -121,12 +124,19 @@ class Artikel3Page extends StatelessWidget {
               const SizedBox(width: 8),
 
               Row(
-                children: const [
-                  Icon(Iconsax.heart, size: 28),
-                  SizedBox(width: 16),
-                  Icon(Icons.bookmark_border, size: 28),
-                  SizedBox(width: 16),
-                  Icon(Icons.share, size: 28),
+                children: [
+                  IconButton(
+                    onPressed: () => setState(() => _isLiked = !_isLiked),
+                    icon: Icon(
+                      _isLiked ? Icons.favorite : Icons.favorite_border,
+                      size: 28,
+                      color: _isLiked ? Colors.red : Colors.black,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  const Icon(Icons.bookmark_border, size: 28),
+                  const SizedBox(width: 16),
+                  const Icon(Icons.share, size: 28),
                 ],
               ),
             ],
